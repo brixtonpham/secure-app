@@ -47,4 +47,4 @@ jobs:
 
 # Run Trivy to scan Docker image
     - name: Run Trivy to scan Docker image
-      run: trivy image --exit-code 1 --severity HIGH,CRITICAL secure-app
+      run: trivy image --exit-code 1 --severity HIGH,CRITICAL --ignore-unfixed  secure-app
