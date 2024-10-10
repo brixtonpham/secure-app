@@ -33,3 +33,17 @@ jobs:
 
     - name: Run Snyk to check for vulnerabilities
       run: snyk test
+# Thêm các bước liên quan đến Trivy
+    - name: Install Trivy
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget
+        wget https://github.com/aquasecurity/trivy/releases/download/v0.31.3/trivy_0.31.3_Linux-64bit.deb
+        sudo dpkg -i trivy_0.31.3_Linux-64bit.deb
+# Build Docker image
+    - name: Build Docker Image
+      run: docker build -t secure-app .
+
+# Run Trivy to scan Docker image
+    - name: Run Trivy to scan Docker image
+      run: trivy image --exit-code 1 --severity HIGH,CRITICAL secure-app
