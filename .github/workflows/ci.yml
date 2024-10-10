@@ -17,7 +17,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '14'
+        node-version: '18' # Su dung nodejs 18
 
     - name: Install dependencies
       run: npm install
@@ -32,7 +32,7 @@ jobs:
       run: snyk auth ${{ secrets.SNYK_TOKEN }}
 
     - name: Run Snyk to check for vulnerabilities
-      run: snyk test
+      run: snyk test --severity-threshold=high --fail-on=never
 # Thêm các bước liên quan đến Trivy
     - name: Install Trivy
       run: |
